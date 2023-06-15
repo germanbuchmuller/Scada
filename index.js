@@ -17,7 +17,7 @@ app.use(
 
 app.get('/status/latest', async(req, res) => {
   try{
-    const lastStatus = await prisma.statusMessage.findFirst({
+    const lastStatus = await prisma.Status.findFirst({
       orderBy: { createdAt: 'desc' },
     });
     if (lastStatus) {
@@ -34,7 +34,7 @@ app.post('/status', async(req, res) => {
   const { status } = req.body;
 
   try {
-    const createdStatus = await prisma.statusMessage.create({
+    const createdStatus = await prisma.Status.create({
       data: { status },
     });
 
