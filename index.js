@@ -63,6 +63,20 @@ app.post('/status', async(req, res) => {
   }
 });
 
+app.get('/stats', async (req, res) => {
+  try {
+    const stats = await prisma.register.groupBy({
+      by: ['type'],
+      _count: true,
+    });
+
+    res.json(stats);
+  } catch (error) {
+    console.log('Error al obtener las estadísticas:', error);
+    res.status(500).json({ error: 'Error al obtener las estadísticas' });
+  }
+});
+
 app.listen(API_PORT, () => {
   console.log('Scada App Started');
 });
