@@ -21,7 +21,7 @@ app.get('/status/latest', async(req, res) => {
       orderBy: { createdAt: 'desc' },
     });
     if (lastStatus) {
-      res.send(lastStatus.status);
+      res.json(lastStatus);
     } else {
       res.status(404).json({ error: 'No hay un mensaje de estado disponible' });
     }
