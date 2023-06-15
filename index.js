@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
+const { API_PORT } = process.env;
 app.use(bodyParser.json());
 
 let lastStatusMessage = null;
@@ -20,6 +21,6 @@ app.post('/status', (req, res) => {
   res.json({ message: 'Mensaje de estado recibido correctamente' });
 });
 
-app.listen(8080, () => {
+app.listen(API_PORT, () => {
   console.log('Scada App Started');
 });
