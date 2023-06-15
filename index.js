@@ -17,7 +17,7 @@ app.use(
 
 app.get('/status/latest', async(req, res) => {
   try{
-    const lastStatus = await prisma.Status.findFirst({
+    const lastStatus = await prisma.Register.findFirst({
       orderBy: { createdAt: 'desc' },
     });
     if (lastStatus) {
@@ -30,12 +30,30 @@ app.get('/status/latest', async(req, res) => {
   }
 });
 
+app.get('/status/:id', async(req, res) => {
+  try{
+    const lastStatus = await prisma.Register.findFirst({
+      orderBy: { createdAt: 'desc' },
+      where:{
+        id: Number(req.query.id)
+      },
+    });
+    if (lastStatus) {
+      res.json(lastStatus);
+    } else {
+      res.status(404).json({ error: 'No available state' });
+    }
+  }catch(e){
+    res.status(500).send("Internal server error");
+  }
+});
+
 app.post('/status', async(req, res) => {
-  const { status } = req.body;
+  const { status, type } = req.body;
 
   try {
-    const createdStatus = await prisma.Status.create({
-      data: { status },
+    const createdStatus = await prisma.Register.create({
+      data: { status, type },
     });
 
     res.json(createdStatus);

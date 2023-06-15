@@ -10,8 +10,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Status {
+model Register {
   id        Int      @id @default(autoincrement())
-  status    String
+  status    Status
+  type      Type?
   createdAt DateTime @default(now())
+}
+
+enum Status {
+  IDLE
+  READING
+}
+
+enum Type {
+  LOW_METAL
+  HIGH_METAL
+  LOW_NO_METAL
+  HIGH_NO_METAL
 }
