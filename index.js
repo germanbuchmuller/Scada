@@ -67,7 +67,10 @@ app.get('/stats', async (req, res) => {
   try {
     const stats = await prisma.register.groupBy({
       by: ['type'],
-      _count: true,
+      count: true,
+      where: {
+        type: { not: null },
+      },
     });
 
     res.json(stats);
