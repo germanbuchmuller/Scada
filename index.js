@@ -2,10 +2,17 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
+const cors = require("cors");
 const { API_PORT } = process.env;
 app.use(bodyParser.json());
 
 let lastStatusMessage = null;
+
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 app.get('/status', (req, res) => {
   if (lastStatusMessage) {
