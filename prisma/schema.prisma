@@ -18,8 +18,8 @@ model Register {
 }
 
 enum Status {
-  IDLE
-  READING
+  PROCESSING
+  CLASSIFYING
 }
 
 enum Type {

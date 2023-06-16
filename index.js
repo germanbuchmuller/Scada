@@ -23,7 +23,7 @@ app.get('/status/latest', async(req, res) => {
     if (lastStatus) {
       res.json(lastStatus);
     } else {
-      res.status(404).json({ error: 'No hay un mensaje de estado disponible' });
+      res.status(404).json({ error: 'Not found' });
     }
   }catch(e){
     res.status(500).send("Internal server error");
@@ -58,8 +58,8 @@ app.post('/status', async(req, res) => {
 
     res.json(createdStatus);
   } catch (error) {
-    console.log('Error al guardar el mensaje de estado:', error);
-    res.status(500).json({ error: 'Error al guardar el mensaje de estado' });
+    console.log('Error:', error);
+    res.status(500).json({ error: 'Internal Server Error ' });
   }
 });
 
@@ -75,7 +75,7 @@ app.get('/stats', async (req, res) => {
 
     res.json(stats);
   } catch (error) {
-    console.log('Error al obtener las estadísticas:', error);
+    console.log('Error', error);
     res.status(500).json({ error: 'Error al obtener las estadísticas' });
   }
 });
