@@ -70,6 +70,7 @@ app.get('/stats', async (req, res) => {
       _count: true,
       where: {
         type: { not: null },
+        status: "STORING"
       },
     });
 
